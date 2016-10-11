@@ -70,6 +70,7 @@ def train_recognizer(recognizer=cv2.face.createLBPHFaceRecognizer,
         cv2.destroyAllWindows()
     recognizer.train(images, np.array(members))
     recognizer.save(save_file)
+    return True
 
 
 def test_individual(image_to_test, threshold=40,
