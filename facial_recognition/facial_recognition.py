@@ -65,7 +65,7 @@ def train_recognizer(recognizer=cv2.face.createLBPHFaceRecognizer,
             members.append(curr_member)
             if demo:
                 cv2.imshow("Training...", tr_img[y: y + h, x: x + w])
-                cv2.waitKey(20)
+                cv2.waitKey(50)
     if demo:
         cv2.destroyAllWindows()
     recognizer.train(images, np.array(members))
