@@ -16,15 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic.base import TemplateView
-from rest_framework.routers import DefaultRouter
 from django.conf import settings
 from django.conf.urls.static import static
-from securedpi import views
+from securedpi_api.urls import router
+from django.contrib.auth.decorators import login_required
+from securedpi.views import DashboardView
 
-
-router = DefaultRouter()
-router.register(r'locks', views.LockViewSet)
-router.register(r'events', views.EventViewSet)
 
 urlpatterns = [
     url(r'^admin/',
@@ -33,6 +30,9 @@ urlpatterns = [
         TemplateView.as_view(
             template_name='securedpi/home_page.html'),
         name='homepage'),
+    url(r'^dashboard/',
+        login_required(DashboardView.as_view()),
+        name='dashboard'),
     url(r'^accounts/',
         include('registration.backends.hmac.urls')),
     url(r'^about/$',

@@ -8,19 +8,12 @@ from django.urls import reverse
 class EventTestCase(TestCase):
     """Create test class for Event model."""
     def setUp(self):
-        """Set up a fake user with a lock."""
-        self.user = User(username='test')
-        self.user.set_password('test')
-        self.user.save()
-        self.lock = Lock(
-            user=self.user,
-            title='lock1',
-            location='codefellows',
-            serial='pi12345')
-        self.lock.save()
+        """Setup for test."""
         self.event = Event(
-            lock_id = self.lock,
-            serial = 'test_serial'
+            lock_id='123',
+            serial='test_serial',
+            mtype='manual',
+            action='lock'
         )
         self.event.save()
 
@@ -31,15 +24,12 @@ class EventTestCase(TestCase):
     def test_attributes_correct(self):
         """Prove the attributes of an event are correct."""
         attr_vals = [
-            ('lock_id', self.lock),
+            ('lock_id', '123'),
             ('serial', 'test_serial'),
-            ('action_taken', ''),
-            ('method', ''),
+            ('status', ''),
+            ('mtype', 'manual'),
+            ('action', 'lock'),
             ('photo', None)
         ]
         for key, val in attr_vals:
             self.assertEqual(getattr(self.event, key), val)
-    
-    def test_lock_has_event(self):
-        """Prove that a lock has 1 event."""
-        self.assertTrue(self.lock.events.count(), 1)

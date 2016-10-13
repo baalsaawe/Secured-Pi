@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'securedpi_locks.apps.SecuredpiLocksConfig',
     'rest_framework',
     'securedpi_events.apps.SecuredpiEventsConfig',
+    'securedpi_api.apps.SecuredpiApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +115,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -177,7 +183,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
 
-LOGIN_REDIRECT_URL = '/locks/dashboard/'
+LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
