@@ -30,6 +30,7 @@ import numpy as np
 import re
 from PIL import Image
 
+<<<<<<< HEAD
 
 CASCADE_MODEL = 'haarcascade_frontalface_default.xml'
 FACE_CASCADE = cv2.CascadeClassifier(CASCADE_MODEL)
@@ -38,6 +39,17 @@ TRAINING_SET_PATH = 'training'
 
 def train_recognizer(recognizer=cv2.face.createLBPHFaceRecognizer,
                      image_path=TRAINING_SET_PATH, save_file='recog_brain.yml',
+=======
+HERE = os.path.dirname(os.path.abspath(__file__))
+CASCADE_MODEL = os.path.join(HERE, 'haarcascade_frontalface_default.xml')
+FACE_CASCADE = cv2.CascadeClassifier(CASCADE_MODEL)
+TRAINING_SET_PATH = os.path.join(HERE, 'training')
+
+
+def train_recognizer(recognizer=cv2.face.createLBPHFaceRecognizer,
+                     image_path=TRAINING_SET_PATH,
+                     save_file=os.path.join(HERE, 'recog_brain.yml'),
+>>>>>>> 4be40d4a31d0735b5c302152b8d4d0cc8d1c8b43
                      recog_model=None,
                      demo=False):
     """Train the facial recognition software with some training photos.
@@ -65,17 +77,28 @@ def train_recognizer(recognizer=cv2.face.createLBPHFaceRecognizer,
             members.append(curr_member)
             if demo:
                 cv2.imshow("Training...", tr_img[y: y + h, x: x + w])
+<<<<<<< HEAD
                 cv2.waitKey(50)
+=======
+                cv2.waitKey(20)
+>>>>>>> 4be40d4a31d0735b5c302152b8d4d0cc8d1c8b43
     if demo:
         cv2.destroyAllWindows()
     recognizer.train(images, np.array(members))
     recognizer.save(save_file)
+<<<<<<< HEAD
     return True
+=======
+>>>>>>> 4be40d4a31d0735b5c302152b8d4d0cc8d1c8b43
 
 
 def test_individual(image_to_test, threshold=40,
                     recognizer=cv2.face.createLBPHFaceRecognizer,
+<<<<<<< HEAD
                     recog_model='recog_brain.yml',
+=======
+                    recog_model=os.path.join(HERE, 'recog_brain.yml'),
+>>>>>>> 4be40d4a31d0735b5c302152b8d4d0cc8d1c8b43
                     verbose=False):
     """Test if an individual has access to the lock.
 
@@ -85,7 +108,11 @@ def test_individual(image_to_test, threshold=40,
     recognizer = recognizer()
     recognizer.load(recog_model)
 
+<<<<<<< HEAD
     image_array = np.array(Image.open(image_to_test).convert('L'), 'uint8')
+=======
+    image_array = np.array(Image.open('/home/ubuntu/checkout' + image_to_test).convert('L'), 'uint8')
+>>>>>>> 4be40d4a31d0735b5c302152b8d4d0cc8d1c8b43
     curr_face = FACE_CASCADE.detectMultiScale(image_array)[0]
     x, y, w, h = curr_face
     test_image = image_array[y: y + h, x: x + w]
