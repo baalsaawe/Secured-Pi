@@ -99,6 +99,7 @@ securedpi_facerec/facial_recognition/tw.jpeg
 securedpi_facerec/facial_recognition/recog_brain.yml
 securedpi_facerec/facial_recognition/recog_brain-small.yml
 securedpi_facerec/facial_recognition/recog_brain-med.yml
+test_brain.yml
 
 lock_photos
 lock_photos/*
